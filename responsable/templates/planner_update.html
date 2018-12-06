@@ -1,0 +1,19 @@
+{% if from.errors %}
+    {% for field in form.errors %}
+    <ul>
+        {{ field }}
+        {% for error in field.error %}
+        <li>{{ error | escape }}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endif %}
+
+
+<form method= "POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type=“submit”> Actualizar Plan </button>
+
+
+</form>

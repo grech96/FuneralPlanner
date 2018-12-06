@@ -1,0 +1,1 @@
+SELECT * FROM funeral_planner.responsable_planner;
