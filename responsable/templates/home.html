@@ -1,15 +1,20 @@
+
+
+
 {% extends 'base.html' %}
 
 {% block title %}  Inicio     {% endblock %}
 
 {% block content %}   
     {%if user.is_authenticated %}
-        <p> Bienvenido {{ user.username }} </p>
+        <H1> Bienvenido {{ user.username }} </H1>
         <p><a href="{% url 'logout' %}">logout</a></p>
         {% if planner %}
             <ul>
                 <li> {{ planner.ashes }}</li>
-                <li><a href="planner/detail/{{planner.id}}"> Ver más </a> </li>
+                <li>{{planner.venue}}</li>
+                <li>{{planner.wish}}</li>
+                <h3><a href="planner/detail/{{planner.id}}"> Ver más </a> </h3>
             </ul>
         {% else %}
             <p>No tienes plan agregado, agrega uno ahora</p>
@@ -19,5 +24,6 @@
         <p>No estas registrado </p>
         <a href="{% url 'login' %}">login</a>
     {% endif %}
+
 
 {% endblock %}

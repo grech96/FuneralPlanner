@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .forms import PlannerForm
 from .models import Planner
@@ -35,13 +35,12 @@ def create_planner(request):
     else:
         return redirect('login')
 
-def update_planner(request):
-    if request.user.is_authenticated:
-        form = PlannerForm(request.POST)
-        if request.method == 'POST':
-            if form.is_valid():
-                Planner = form.save(commit = False)
-                return redirect('index') 
-        return render (request,'planner_update.html',{'form': form})           
-    else:
-        return redirect('login')
+def update_planner(request, planner_id):
+    obj = get_object_or_404(Planner, id = planner_id)
+    form = PlannerForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+    context = {
+        'form': form
+    }
+    return render(request, "planner_update.html", context)
