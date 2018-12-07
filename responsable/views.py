@@ -30,6 +30,8 @@ def create_planner(request):
         if request.method == 'POST':
             if form.is_valid():
                 planner = form.save(commit = False)
+                planner.user = request.user 
+                planner.save()
                 return redirect('index') 
         return render (request,'planner_create.html',{'form': form})           
     else:

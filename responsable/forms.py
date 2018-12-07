@@ -10,7 +10,7 @@ class PlannerForm(forms.ModelForm):
             'ashes',
             'venue',
             'wish',
-            'user',
+            
         )    
 
 
